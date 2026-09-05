@@ -1,4 +1,4 @@
-import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, interpolate, random, useCurrentFrame, useVideoConfig } from "remotion";
 import React, { useMemo } from "react";
 
 const CodeRain: React.FC = () => {
@@ -17,10 +17,21 @@ const CodeRain: React.FC = () => {
 const CodeColumn: React.FC<{ x: number }> = ({ x }) => {
     const frame = useCurrentFrame();
     const { height } = useVideoConfig();
-    const speed = useMemo(() => 5 + Math.random() * 10, []);
-    const offset = useMemo(() => Math.random() * height, [height]);
+    const speed = useMemo(() => 5 + random(`speed-${x}`) * 10, [x]);
+    const offset = useMemo(() => random(`offset-${x}`) * height, [height, x]);
 
     const y = (frame * speed + offset) % (height + 200) - 100;
+
+    const scrambled = useMemo(
+        () =>
+            "<?php echo 'Building scalable web solutions'; ?>"
+                .split("")
+                .map((char, i) => ({ char, order: random(`char-${x}-${i}`) }))
+                .sort((a, b) => a.order - b.order)
+                .map(({ char }) => char)
+                .join(""),
+        [x],
+    );
 
     return (
         <div
@@ -36,7 +47,7 @@ const CodeColumn: React.FC<{ x: number }> = ({ x }) => {
                 whiteSpace: "nowrap",
             }}
         >
-            {"<?php echo 'Building scalable web solutions'; ?>".split("").sort(() => Math.random() - 0.5).join("")}
+            {scrambled}
         </div>
     );
 };
