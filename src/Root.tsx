@@ -1,6 +1,6 @@
 import "./index.css";
 import { Composition } from "remotion";
-import { MyComposition } from "./Composition";
+import { calculateMetadata, MyComposition } from "./Composition";
 import { PhatDevIntro } from "./PhatDevIntro";
 
 export const RemotionRoot: React.FC = () => {
@@ -9,6 +9,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition
         id="MyComp"
         component={MyComposition}
+        calculateMetadata={calculateMetadata}
         durationInFrames={90}
         fps={30}
         width={1080}

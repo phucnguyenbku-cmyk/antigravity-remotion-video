@@ -1,0 +1,16 @@
+1
+00:00:00,100 --> 00:00:03,150
+Bạn vẫn ngồi gõ từng dòng code mỗi ngày?
+
+2
+00:00:03,100 --> 00:00:07,025
+Năm công cụ sau đây làm thay bạn phần việc lặp đi lặp lại.
+
+3
+00:00:07,025 --> 00:00:12,600
+Từ viết code, dựng video, tới phân tích dữ liệu, tất cả đều chạy tự động.
+
+4
+00:00:12,600 --> 00:00:16,325
+Xem hết video để không bỏ lỡ công cụ cuối cùng.
+

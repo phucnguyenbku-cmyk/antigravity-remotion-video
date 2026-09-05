@@ -1,0 +1,16 @@
+1
+00:00:00,100 --> 00:00:03,312
+Vibe coding không phải là gõ code nhanh hơn.
+
+2
+00:00:03,262 --> 00:00:06,825
+Bạn mô tả ý tưởng, máy lo phần cú pháp.
+
+3
+00:00:06,825 --> 00:00:10,837
+Một buổi chiều đủ để biến bản phác thảo thành ứng dụng chạy được.
+
+4
+00:00:10,837 --> 00:00:14,300
+Điều kiện duy nhất là bạn phải mô tả đủ rõ.
+
