@@ -1,6 +1,6 @@
 import "./index.css";
 import { Composition } from "remotion";
-import { MyComposition, VideoProps } from "./Composition";
+import { MyComposition } from "./Composition";
 import { PhatDevIntro } from "./PhatDevIntro";
 
 export const RemotionRoot: React.FC = () => {
