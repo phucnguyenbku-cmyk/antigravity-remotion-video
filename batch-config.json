@@ -1,0 +1,32 @@
+[
+  {
+    "id": "video_01",
+    "props": {
+      "title": "5 Công Cụ AI Đột Phá 2026",
+      "subtitle": "Tăng hiệu suất làm việc gấp 10 lần với Antigravity",
+      "badgeText": "AI TOOLS 2026",
+      "bgGradient": "linear-gradient(135deg, #022c22 0%, #064e3b 50%, #047857 100%)",
+      "accentColor": "#34d399"
+    }
+  },
+  {
+    "id": "video_02",
+    "props": {
+      "title": "Bí Quyết Vibe Coding Đỉnh Cao",
+      "subtitle": "Từ ý tưởng thành ứng dụng hoàn chỉnh trong vài phút",
+      "badgeText": "VIBE CODING",
+      "bgGradient": "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)",
+      "accentColor": "#818cf8"
+    }
+  },
+  {
+    "id": "video_03",
+    "props": {
+      "title": "Tự Động Hóa Kênh TikTok Triệu View",
+      "subtitle": "Sản xuất video hàng loạt không cần lộ mặt",
+      "badgeText": "TIKTOK AUTOMATION",
+      "bgGradient": "linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #991b1b 100%)",
+      "accentColor": "#f87171"
+    }
+  }
+]

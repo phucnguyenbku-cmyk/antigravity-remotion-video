@@ -2,3 +2,15 @@ node_modules
 dist
 .DS_Store
 .env
+
+# Remotion render output
+out/
+.remotion/
+
+# Build / cache
+.next
+*.tsbuildinfo
+
+# Logs
+*.log
+npm-debug.log*
