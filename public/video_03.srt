@@ -1,0 +1,16 @@
+1
+00:00:00,100 --> 00:00:02,825
+Kênh triệu view không bắt bạn lộ mặt.
+
+2
+00:00:02,775 --> 00:00:07,650
+Kịch bản, giọng đọc, dựng hình, mỗi khâu đều có công cụ lo.
+
+3
+00:00:07,650 --> 00:00:11,350
+Bạn chỉ giữ lại phần quan trọng nhất là chọn chủ đề.
+
+4
+00:00:11,350 --> 00:00:14,187
+Phần còn lại để máy chạy hàng loạt.
+

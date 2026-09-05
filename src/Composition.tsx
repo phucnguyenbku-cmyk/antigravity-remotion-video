@@ -1,19 +1,46 @@
 import React from "react";
+import { Caption, parseSrt } from "@remotion/captions";
+import { getAudioDurationInSeconds } from "@remotion/media-utils";
 import {
   AbsoluteFill,
+  Audio,
+  CalculateMetadataFunction,
   interpolate,
   spring,
+  staticFile,
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
 
-export interface VideoProps {
+export type VideoProps = {
   title?: string;
   subtitle?: string;
   badgeText?: string;
   bgGradient?: string;
   accentColor?: string;
-}
+  voiceFile?: string;
+  captionFile?: string;
+  captions?: Caption[];
+};
+
+// Stretch the composition to fit the voiceover, plus one second of tail, and
+// load the subtitles up front so the component can render them synchronously.
+export const calculateMetadata: CalculateMetadataFunction<VideoProps> = async ({ props }) => {
+  const captions = props.captionFile
+    ? parseSrt({ input: await (await fetch(staticFile(props.captionFile))).text() })
+        .captions
+    : undefined;
+
+  if (!props.voiceFile) {
+    return { props: { ...props, captions } };
+  }
+
+  const seconds = await getAudioDurationInSeconds(staticFile(props.voiceFile));
+  return {
+    durationInFrames: Math.ceil(seconds * 30) + 30,
+    props: { ...props, captions },
+  };
+};
 
 export const MyComposition: React.FC<VideoProps> = ({
   title = "Sản Xuất Video Hàng Loạt",
@@ -21,9 +48,15 @@ export const MyComposition: React.FC<VideoProps> = ({
   badgeText = "AI VIDEO GENERATOR",
   bgGradient = "linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%)",
   accentColor = "#818cf8",
+  voiceFile,
+  captions,
 }) => {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, durationInFrames } = useVideoConfig();
+
+  // Spread the entrance over the clip so a long voiceover is not left with a
+  // static frame after the first second.
+  const stagger = durationInFrames / 12;
 
   // Entrance spring animations
   const badgeScale = spring({
@@ -33,28 +66,54 @@ export const MyComposition: React.FC<VideoProps> = ({
   });
 
   const titleProgress = spring({
-    frame: frame - 10,
+    frame: frame - stagger,
     fps,
     config: { damping: 14, mass: 0.8 },
   });
 
-  const titleOpacity = interpolate(frame, [10, 25], [0, 1], {
+  const titleOpacity = interpolate(frame, [stagger, stagger + 15], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
   const subtitleProgress = spring({
-    frame: frame - 20,
+    frame: frame - stagger * 2,
     fps,
     config: { damping: 14, mass: 0.8 },
   });
 
-  const subtitleOpacity = interpolate(frame, [20, 35], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
+  const subtitleOpacity = interpolate(
+    frame,
+    [stagger * 2, stagger * 2 + 15],
+    [0, 1],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
+  );
 
-  const decorRotation = interpolate(frame, [0, 180], [0, 360]);
+  // One full turn, a slow push-in and a fade-out, all keyed to the clip length.
+  const decorRotation = interpolate(frame, [0, durationInFrames], [0, 360]);
+
+  const zoom = interpolate(frame, [0, durationInFrames], [1, 1.05]);
+
+  // The last cue that has started wins, so overlapping timestamps never stack.
+  const timeMs = (frame / fps) * 1000;
+  const shown =
+    captions?.filter(
+      (caption) => timeMs >= caption.startMs && timeMs <= caption.endMs,
+    ) ?? [];
+  const activeCaption = shown[shown.length - 1];
+
+  const exitOpacity = interpolate(
+    frame,
+    [durationInFrames - 15, durationInFrames],
+    [1, 0],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
+  );
 
   return (
     <AbsoluteFill
@@ -69,8 +128,13 @@ export const MyComposition: React.FC<VideoProps> = ({
         padding: "60px 40px",
         overflow: "hidden",
         position: "relative",
+        transform: `scale(${zoom})`,
+        opacity: exitOpacity,
       }}
     >
+      {voiceFile ? <Audio src={staticFile(voiceFile)} /> : null}
+      <Audio src={staticFile("bgm.mp3")} volume={0.15} />
+
       {/* Dynamic background glow */}
       <div
         style={{
@@ -154,6 +218,29 @@ export const MyComposition: React.FC<VideoProps> = ({
       >
         {subtitle}
       </p>
+
+      {/* Burned-in subtitle */}
+      {activeCaption ? (
+        <div
+          style={{
+            position: "absolute",
+            bottom: "160px",
+            maxWidth: "880px",
+            padding: "18px 32px",
+            borderRadius: "16px",
+            backgroundColor: "rgba(2, 6, 23, 0.72)",
+            border: `1px solid ${accentColor}40`,
+            color: "#f8fafc",
+            fontSize: "34px",
+            fontWeight: 600,
+            lineHeight: 1.4,
+            textAlign: "center",
+            textShadow: "0 2px 8px rgba(0, 0, 0, 0.8)",
+          }}
+        >
+          {activeCaption.text}
+        </div>
+      ) : null}
 
       {/* Footer bar */}
       <div

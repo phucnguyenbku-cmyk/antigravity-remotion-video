@@ -6,7 +6,10 @@
       "subtitle": "Tăng hiệu suất làm việc gấp 10 lần với Antigravity",
       "badgeText": "AI TOOLS 2026",
       "bgGradient": "linear-gradient(135deg, #022c22 0%, #064e3b 50%, #047857 100%)",
-      "accentColor": "#34d399"
+      "accentColor": "#34d399",
+      "voiceFile": "video_01.mp3",
+      "captionFile": "video_01.srt",
+      "script": "Bạn vẫn ngồi gõ từng dòng code mỗi ngày? Năm công cụ sau đây làm thay bạn phần việc lặp đi lặp lại. Từ viết code, dựng video, tới phân tích dữ liệu, tất cả đều chạy tự động. Xem hết video để không bỏ lỡ công cụ cuối cùng."
     }
   },
   {
@@ -16,7 +19,10 @@
       "subtitle": "Từ ý tưởng thành ứng dụng hoàn chỉnh trong vài phút",
       "badgeText": "VIBE CODING",
       "bgGradient": "linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4338ca 100%)",
-      "accentColor": "#818cf8"
+      "accentColor": "#818cf8",
+      "voiceFile": "video_02.mp3",
+      "captionFile": "video_02.srt",
+      "script": "Vibe coding không phải là gõ code nhanh hơn. Bạn mô tả ý tưởng, máy lo phần cú pháp. Một buổi chiều đủ để biến bản phác thảo thành ứng dụng chạy được. Điều kiện duy nhất là bạn phải mô tả đủ rõ."
     }
   },
   {
@@ -26,7 +32,10 @@
       "subtitle": "Sản xuất video hàng loạt không cần lộ mặt",
       "badgeText": "TIKTOK AUTOMATION",
       "bgGradient": "linear-gradient(135deg, #450a0a 0%, #7f1d1d 50%, #991b1b 100%)",
-      "accentColor": "#f87171"
+      "accentColor": "#f87171",
+      "voiceFile": "video_03.mp3",
+      "captionFile": "video_03.srt",
+      "script": "Kênh triệu view không bắt bạn lộ mặt. Kịch bản, giọng đọc, dựng hình, mỗi khâu đều có công cụ lo. Bạn chỉ giữ lại phần quan trọng nhất là chọn chủ đề. Phần còn lại để máy chạy hàng loạt."
     }
   }
 ]
